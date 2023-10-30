@@ -18,6 +18,9 @@ class GGNNPreprocessor(object):
         self.out_size = out_size
 
     def get_input_features(self, mol):
+
+        # update this part to add more node features
+
         type_check_num_atoms(mol, self.max_atoms)
         atom_array = construct_atomic_number_array(mol, out_size=self.out_size)
         adj_array = construct_discrete_edge_matrix(mol, out_size=self.out_size)
@@ -59,6 +62,11 @@ def type_check_num_atoms(mol, num_max_atoms=-1):
 
 
 def construct_atomic_number_array(mol, out_size=-1):
+
+    # in addition to atomic number, the node feature will not 
+    # be just one array, but a matrix of N*K, where N is the number
+    # of atoms and K is the number of features
+
     atom_list = [a.GetAtomicNum() for a in mol.GetAtoms()]
     n_atom = len(atom_list)
 

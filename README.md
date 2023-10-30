@@ -1,5 +1,7 @@
 # molecule-cell-gen
 
+__Installation__:
+
 __GDSS Overview__:
 A graph $G$ with $N$ nodes is defined by its node features $X \in \mathbb{R}^{N \times F}$ and the weighted adjacency matrix $A \in \mathbb{R}^{N \times N}$ as $G = (X,A) \in \mathbb{N\times F} \times \mathbb R^{N \times N}:= \mathcal g$
 

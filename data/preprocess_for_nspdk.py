@@ -31,12 +31,12 @@ else:
 smiles = pd.read_csv(f'data/{dataset.lower()}.csv')[col]
 test_smiles = [smiles.iloc[i] for i in test_idx]
 train_smiles = [smiles.iloc[i] for i in range(len(smiles)) if i not in test_idx]
-nx_graphs = mols_to_nx(smiles_to_mols(test_smiles))
+nx_graphs_test = mols_to_nx(smiles_to_mols(test_smiles))
 nx_graphs_train = mols_to_nx(smiles_to_mols(train_smiles))
-print(f'Converted the test molecules into {len(nx_graphs)} graphs')
+print(f'Converted the test molecules into {len(nx_graphs_test)} graphs')
 
 with open(f'data/{dataset.lower()}_test_nx.pkl', 'wb') as f:
-    pickle.dump(nx_graphs, f)
+    pickle.dump(nx_graphs_test, f)
 
 with open(f'data/{dataset.lower()}_train_nx.pkl', 'wb') as f:
     pickle.dump(nx_graphs_train, f)

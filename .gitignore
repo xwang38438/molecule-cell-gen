@@ -1,2 +1,3 @@
 data/qm9_train_nx.pkl
 data/qm9_kekulized.npz
+data/zinc250k_train_nx.pkl

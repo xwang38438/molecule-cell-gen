@@ -4,7 +4,7 @@
 - Follow the instructions in [TopoModelX](https://github.com/pyt-team/TopoModelX/tree/main)
 
 ## GDSS Overview:
-A graph $G$ with $N$ nodes is defined by its node features $X \in \mathbb{R}^{N \times F}$ and the weighted adjacency matrix $A \in \mathbb{R}^{N \times N}$ as $G = (X_0, A_0) \in \mathbb R^{N\times F} \times \mathbb R^{N \times N}:= \mathcal G$, where $F$ is the dimension of the node features. The diffusion process $\left\{\boldsymbol{G}_t=\left(\boldsymbol{X}_t, \boldsymbol{A}_t\right)\right\}_{t \in[0, T]}$ transforms the node features and the adjacency matrices to a simple noise distribution. We can model the diffusion process by the following Ito SDE
+A graph $G$ with $N$ nodes is defined by its node features $X \in \mathbb{R}^{N \times F}$ and the weighted adjacency matrix $A \in \mathbb{R}^{N \times N}$ as $G = (X_0, A_0) \in \mathbb R^{N\times F} \times \mathbb R^{N \times N}:= \mathcal G$, where $F$ is the dimension of the node features. The diffusion process $\left\{\mathbf{G}_t=\left(\mathbf{X}_t, \mathbf{A}_t\right)\right\}_{t \in[0, T]}$ transforms the node features and the adjacency matrices to a simple noise distribution. We can model the diffusion process by the following Ito SDE
 
 \begin{equation}
 \mathrm{d} \boldsymbol{G}_t=\mathbf{f}_t\left(\boldsymbol{G}_t\right) \mathrm{d} t+\mathbf{g}_t\left(\boldsymbol{G}_t\right) \mathrm{d} \mathbf{w}, \quad \boldsymbol{G}_0 \sim p_{\text {data }},

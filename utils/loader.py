@@ -33,9 +33,10 @@ def load_device():
         device = 'cpu'
     return device
 
-
+# require change 
 def load_model(params):
     params_ = params.copy()
+    # "model_type" is set in load_model_params()
     model_type = params_.pop('model_type', None)
     if model_type == 'ScoreNetworkX':
         model = ScoreNetworkX(**params_)
@@ -47,7 +48,8 @@ def load_model(params):
         raise ValueError(f"Model Name <{model_type}> is Unknown")
     return model
 
-
+# keep adam optimizer
+# scheduler requires discussion
 def load_model_optimizer(params, config_train, device):
     model = load_model(params)
     if isinstance(device, list):
@@ -63,7 +65,9 @@ def load_model_optimizer(params, config_train, device):
     
     return model, optimizer, scheduler
 
-
+#----------------------------------------------------------------
+# seems improving the performance, may keep
+# not interfere the model, only parameters update
 def load_ema(model, decay=0.999):
     ema = ExponentialMovingAverage(model.parameters(), decay=decay)
     return ema
@@ -83,14 +87,16 @@ def load_data(config, get_graph_list=False):
         from utils.data_loader import dataloader
         return dataloader(config, get_graph_list)
 
+#---------------------------------------------------------------
 
+# require change
 def load_batch(batch, device):
     device_id = f'cuda:{device[0]}' if isinstance(device, list) else device
     x_b = batch[0].to(device_id)
     adj_b = batch[1].to(device_id)
     return x_b, adj_b
 
-
+# GDSS uses VE(variance exploding) SDE for molecule generation
 def load_sde(config_sde):
     sde_type = config_sde.type
     beta_min = config_sde.beta_min
@@ -146,7 +152,8 @@ def load_sampling_fn(config_train, config_module, config_sample, device):
                                 eps=config_sample.eps, device=device_id)
     return sampling_fn
 
-
+# require change
+# need new hyperparameters for CAN
 def load_model_params(config):
     config_m = config.model
     max_feat_num = config.data.max_feat_num
@@ -164,7 +171,7 @@ def load_model_params(config):
                     'adim':config_m.adim, 'num_heads':config_m.num_heads, 'conv':config_m.conv}
     return params_x, params_adj
 
-
+# require change
 def load_ckpt(config, device, ts=None, return_ckpt=False):
     device_id = f'cuda:{device[0]}' if isinstance(device, list) else device
     ckpt_dict = {}
@@ -182,7 +189,7 @@ def load_ckpt(config, device, ts=None, return_ckpt=False):
         ckpt_dict['ckpt'] = ckpt
     return ckpt_dict
 
-
+# require change
 def load_model_from_ckpt(params, state_dict, device):
     model = load_model(params)
     if 'module.' in list(state_dict.keys())[0]:

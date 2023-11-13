@@ -5,6 +5,7 @@ from utils.graph_utils import node_flags, mask_x, mask_adjs, gen_noise
 
 def get_score_fn(sde, model, train=True, continuous=True):
 
+  # import score function
   if not train:
     model.eval()
   model_fn = model
@@ -23,6 +24,7 @@ def get_score_fn(sde, model, train=True, continuous=True):
   elif isinstance(sde, VESDE):
     def score_fn(x, adj, flags, t):
       if continuous:
+        # should check how the model utilizes the flags
         score = model_fn(x, adj, flags)
       else:  
         raise NotImplementedError(f"Discrete not supported")
